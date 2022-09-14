@@ -1,0 +1,41 @@
+import React from "react";
+import { Button, Item, Label, Segment } from "semantic-ui-react";
+import { Activity } from "../../../app/models/activity";
+
+//C:\Users\tomng\Reactivity\client-app\src\app\models\activity.ts
+interface Props {
+  activities: Activity[];
+  selectActivity: (id: string) => void;
+  deleteActivity: (id: string) => void;
+}
+
+//some ternary conditions to decide color and UI comes from sematic UI react
+export default function ActivityList({ activities, selectActivity, deleteActivity }: Props) {
+  return (
+    <Segment>
+      <Item.Group divided>
+        {activities.map(activity => (
+          <Item key={activity.id}>
+            <Item.Content>
+              <Item.Header style={activity.title.match("Future") ? { color: "crimson" } : { color: "green", textDecoration: "line-through" }} as="a">
+                {activity.title}{" "}
+              </Item.Header>
+              <Item.Meta>{activity.date}</Item.Meta>
+              <Item.Description>
+                <div>{activity.description}</div>
+                <div>
+                  {activity.city}, {activity.venue}
+                </div>
+              </Item.Description>
+              <Item.Extra>
+                <Button onClick={() => selectActivity(activity.id)} floated="right" content="view" color="blue" />
+                <Button onClick={() => deleteActivity(activity.id)} floated="right" content="delete" color="red" />
+                <Label basic content={activity.category} />
+              </Item.Extra>
+            </Item.Content>
+          </Item>
+        ))}
+      </Item.Group>
+    </Segment>
+  );
+}
