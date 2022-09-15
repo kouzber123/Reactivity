@@ -15,6 +15,7 @@ namespace Persistence
             //if we have data then return else create new activities
             if (context.Activities.Any()) return;
             
+            // colllection
             var activities = new List<Activity>
             {
                 new Activity
@@ -26,6 +27,7 @@ namespace Persistence
                     City = "London",
                     Venue = "Pub",
                 },
+                
                 new Activity
                 {
                     Title = "Past Activity 2",

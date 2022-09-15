@@ -33,6 +33,7 @@ export default function ActivityForm({ activity: selectedActivity, closeForm, cr
     setActivity({ ...activity, [name]: value });
   }
 
+  //THIS IS THE EDIT FIELD
   //making html form "reactive"
   //value will be displayed on the edit field
   return (

@@ -8,6 +8,8 @@ import { v4 as uuid } from "uuid";
 import agent from "../api/agent";
 import LoadingComponent from "./LoadingComponents";
 
+
+//APP.TSX HANDLES EVERYTHING
 //<Activity>  =  set a type
 function App() {
   const [activities, setActivities] = useState<Activity[]>([]);
@@ -84,6 +86,8 @@ function App() {
 
   if (loading) return <LoadingComponent content="Loading app" />
   //html + props
+
+  //PROPS FROM LAYOUTS AND FEATURES
   return (
     <>
       <NavBar openForm={handleFormOpen} />

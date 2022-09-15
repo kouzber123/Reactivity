@@ -20,6 +20,7 @@ interface Props {
 }
 
 export default function ActivityDashboard({ activities, selectedActivity, deleteActivity, selectActivity, cancelSelectActivity, editMode, openForm, closeForm, createOrEdit, submitting }: Props) {
+  //HERE WE ADD THE COMPONENTS FROM THE DETAILS , DASHBOARD and FORM
   return (
     <Grid>
       <Grid.Column width="10">

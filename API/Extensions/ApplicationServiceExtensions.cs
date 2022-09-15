@@ -24,13 +24,13 @@ namespace API.Extensions
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
             });
-            //use datacontext.cs 
+            //use datacontext.cs  from persistence folder
             services.AddDbContext<DataContext>(opt => 
             {
-                //connection string source
+                //connection string source with this we can add the context to the database
                 opt.UseSqlite(config.GetConnectionString("DefaultConnection")); 
             });
-            //allow any method and header from 3000
+            //allow any method and header from 3000 otherwise cors will block requests
             services.AddCors(opt => 
             {
                 opt.AddPolicy("CorsPolicy", policy =>

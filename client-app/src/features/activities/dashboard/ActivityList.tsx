@@ -18,7 +18,7 @@ export default function ActivityList({ activities, selectActivity, deleteActivit
     setTarget(e.currentTarget.name);
     deleteActivity(id);
   }
-
+//THIS IS THE FRONT SCREEN OF ALL ACTIVITIES
   return (
     <Segment>
       <Item.Group divided>
