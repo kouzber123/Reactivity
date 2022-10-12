@@ -2,6 +2,10 @@ using Application.Activities;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 
+
+
+/*A Controller is a class that implements operations defined by an application's API. 
+It implements an application's business logic and acts as a bridge between the HTTP/REST API and domain/database models.*/
 namespace API.Controllers
 {
   //This will handle CRUD commands

@@ -15,6 +15,7 @@ namespace API
 
           try
           {
+            //get data from the datacontext create database if not exisitng then seed the seeddata of the datacontext
             var context = services.GetRequiredService<DataContext>();
             await context.Database.MigrateAsync();
             await Seed.SeedData(context);

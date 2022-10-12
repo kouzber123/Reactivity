@@ -1,15 +1,25 @@
-import React from "react";
-import { Button, Card, Image} from "semantic-ui-react";
+import { observer } from "mobx-react-lite";
+import React, { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { Button, Card, Image } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layouts/LoadingComponents";
 import { useStore } from "../../../app/stores/store";
 
-export default function ActivityDetails() {
+//have to make observer otherwise its not able follow initial flagging
+export default observer(function ActivityDetails() {
   //get all the actions from container
   const { activityStore } = useStore();
+  const { selectedActivity: activity, loadActivity, loadingInitial } = activityStore;
+  const { id } = useParams<{ id: string }>();
 
-  const { selectedActivity: activity, openForm, cancelSelectedActivity } = activityStore;
+  //we want side effect to occur > useEffect
+  useEffect(() => {
+    if (id) loadActivity(id);
+  }, [id, loadActivity]);
+
   //THIS IS AFTER SELECTING VIEW from the Activities
-  if (!activity) return <LoadingComponent />;
+  if (loadingInitial || !activity) return <LoadingComponent />;
+
   return (
     <Card fluid>
       <Image src={`/assets/categoryImages/${activity.category}.jpg`} />
@@ -22,10 +32,10 @@ export default function ActivityDetails() {
       </Card.Content>
       <Card.Content extra>
         <Button.Group widths="2">
-          <Button onClick={() => openForm(activity.id)} basic color="blue" content="Edit" />
-          <Button onClick={cancelSelectedActivity} basic color="grey" content="Cancel" />
+          <Button as={Link} to={`/manage/${activity.id}`} basic color="blue" content="Edit" />
+          <Button as={Link} to={`/activities`} basic color="grey" content="Cancel" />
         </Button.Group>
       </Card.Content>
     </Card>
   );
-}
+});
