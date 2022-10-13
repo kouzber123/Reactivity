@@ -12,9 +12,23 @@ export default class ActivityStore {
     //this = this function makeobs
     makeAutoObservable(this);
   }
+  //get date
   get activitiesByDate() {
     return Array.from(this.activityRegistry.values()).sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
   }
+
+  //get grouped
+
+  get groupedActivities() {
+    return Object.entries(
+      this.activitiesByDate.reduce((activities, activity) => {
+        const date = activity.date;
+        activities[date] = activities[date] ? [...activities[date], activity] : [activity];
+        return activities;
+      }, {} as { [key: string]: Activity[] })
+    );
+  }
+
   //auto function makes autoobservable automatic
   loadActivities = async () => {
     this.loadingInitial = true;
