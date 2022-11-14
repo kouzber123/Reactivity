@@ -1,5 +1,7 @@
 using Persistence;
 using Microsoft.EntityFrameworkCore;
+using Domain;
+using Microsoft.AspNetCore.Identity;
 
 namespace API
 {
@@ -17,8 +19,9 @@ namespace API
           {
             //get data from the datacontext create database if not exisitng then seed the seeddata of the datacontext
             var context = services.GetRequiredService<DataContext>();
+            var userManager = services.GetRequiredService<UserManager<AppUser>>();
             await context.Database.MigrateAsync();
-            await Seed.SeedData(context);
+            await Seed.SeedData(context, userManager);
           } 
           catch (Exception ex) {
              var logger = services.GetRequiredService<ILogger<Program>>();

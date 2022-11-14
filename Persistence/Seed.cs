@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain;
+using Microsoft.AspNetCore.Identity;
 
 namespace Persistence
 {
@@ -10,8 +11,21 @@ namespace Persistence
     
     {
         //static > no need to create instance
-        public static async Task SeedData(DataContext context)
+        public static async Task SeedData(DataContext context, UserManager<AppUser>userManager)
         {
+            if(!userManager.Users.Any()){
+                var users = new List<AppUser>{
+                    new AppUser{DisplayName= "Bob", UserName = "bob", Email = "bob@test.com"},
+                    new AppUser{DisplayName= "Tom", UserName = "Tom", Email = "Tom@test.com"},
+                    new AppUser{DisplayName= "Kom", UserName = "kom", Email = "kom@test.com"},
+                };
+                
+                foreach (var user in users)
+                {
+                    await userManager.CreateAsync(user, "Pa$$w0rd");
+                }
+            }
+
             //if we have data then return else create new activities
             if (context.Activities.Any()) return;
             

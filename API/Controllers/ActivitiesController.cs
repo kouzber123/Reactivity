@@ -1,5 +1,6 @@
 using Application.Activities;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -23,7 +24,9 @@ namespace API.Controllers
     }
 
 
+    
 //------------------GET BY ID
+    
     [HttpGet("{id}")] // acitivities/id > indvidual id 
     public async Task<IActionResult> GetActivity(Guid id)   //with an guid id
     {
