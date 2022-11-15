@@ -9,8 +9,11 @@ using Microsoft.AspNetCore.Mvc;
 It implements an application's business logic and acts as a bridge between the HTTP/REST API and domain/database models.*/
 namespace API.Controllers
 {
+
+
   //This will handle CRUD commands
   //WE NEED DOMAIN folder TO GET THE MODEL - ACTIVITY
+  [AllowAnonymous]
   public class ActivitiesController : BaseApiController //This class inherits Api Controller so all data will be seen as API
   {
     

@@ -10,6 +10,11 @@ import TestErrors from "../../features/errors/TestError";
 import { ToastContainer } from "react-toastify";
 import NotFound from "../../features/errors/NotFound";
 import ServerError from "../../features/errors/ServerError";
+import LoginForm from "../../features/users/LoginForm";
+import { useStore } from "../stores/store";
+import { useEffect } from "react";
+import LoadingComponent from "./LoadingComponents";
+import ModalContainer from "../common/modals/modalContainer";
 
 //APP.TSX HANDLES EVERYTHING
 //<Activity>  =  set a type
@@ -19,7 +24,7 @@ function App() {
   //when user clicks ceate activity whilst being on edit page
   //new empty form will appear instead because of tracking key
   const location = useLocation();
-
+  const { commonStore, userStore } = useStore();
   //PROPS FROM LAYOUTS AND FEATURES
 
   //the ones in yellow are ones that do not observe
@@ -27,9 +32,20 @@ function App() {
 
   //conditional pathing
   //any route that matches / + else
+
+  useEffect(() => {
+    if (commonStore.token) {
+      userStore.getUser().finally(() => commonStore.setAppLoaded());
+    } else {
+      commonStore.setAppLoaded();
+    }
+  }, [commonStore, userStore]);
+
+  if (!commonStore.appLoaded) return <LoadingComponent content="Loading app..." />;
   return (
     <>
       <ToastContainer position="bottom-right" hideProgressBar />
+      <ModalContainer />
       <Route exact path="/" component={HomePage} />
 
       <Route
@@ -44,6 +60,7 @@ function App() {
                 <Route key={location.key} path={["/createActivity", "/manage/:id"]} component={ActivityForm} />
                 <Route path={"/errors"} component={TestErrors} />
                 <Route path={"/server-error"} component={ServerError} />
+                <Route path={"/login"} component={LoginForm} />
                 <Route component={NotFound} />
               </Switch>
             </Container>

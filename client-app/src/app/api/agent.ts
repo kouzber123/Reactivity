@@ -3,6 +3,7 @@ import { type } from "os";
 import { toast } from "react-toastify";
 import { history } from "../..";
 import { Activity } from "../models/activity";
+import { User, UserFormValues } from "../models/user";
 import { store } from "../stores/store";
 
 //adding delay fakery
@@ -14,6 +15,13 @@ const sleep = (delay: number) => {
 };
 
 axios.defaults.baseURL = "http://localhost:5000/api";
+
+axios.interceptors.request.use(config => {
+  const token = store.commonStore.token;
+  if (token) config.headers!.Authorization = `Bearer ${token}`;
+  return config;
+});
+
 //envoke sleep add 1second
 axios.interceptors.response.use(
   async response => {
@@ -25,8 +33,7 @@ axios.interceptors.response.use(
 
     switch (status) {
       case 400:
-
-        if(typeof data == "string"){
+        if (typeof data == "string") {
           toast.error(data);
         }
         if (config.method === "get" && data.errors.hasOwnProperty("id")) {
@@ -81,9 +88,16 @@ const Activities = {
 //details, update and delete = id because we want individual data
 //create just posts new activity to the current list
 
+const Account = {
+  current: () => requests.get<User>("/account"),
+  login: (user: UserFormValues) => requests.post<User>("/account/login", user),
+  register: (user: UserFormValues) => requests.post<User>("/account/register", user)
+};
+
 //this is for exporting above data
 const agent = {
-  Activities
+  Activities,
+  Account
 };
 
 export default agent;
