@@ -13,7 +13,7 @@ namespace API.Controllers
 
   //This will handle CRUD commands
   //WE NEED DOMAIN folder TO GET THE MODEL - ACTIVITY
-  [AllowAnonymous]
+  // [AllowAnonymous]
   public class ActivitiesController : BaseApiController //This class inherits Api Controller so all data will be seen as API
   {
     
@@ -52,6 +52,7 @@ namespace API.Controllers
       return HandleResult(await Mediator.Send(new Create.Command {Activity = activity}));
     }
 
+  [Authorize(Policy = "IsActivityHost")]
 //----------------Update a post
     [HttpPut("{id}")]
     public async Task <IActionResult> EditActivity(Guid id, Activity activity)
@@ -61,10 +62,17 @@ namespace API.Controllers
     }
 
 //--------------------Delete by ID
+    [Authorize(Policy = "IsActivityHost")]
     [HttpDelete("{id}")]
     public async Task <IActionResult> DeleteActivity(Guid id)
     {
       return HandleResult(await Mediator.Send(new Delete.Command{Id = id}));
+    }
+
+    [HttpPost("{id}/attend")]
+    public async Task<IActionResult> Attend(Guid id)
+    {
+      return HandleResult(await Mediator.Send(new UpdateAttendance.Command{Id = id}));
     }
 
   }
