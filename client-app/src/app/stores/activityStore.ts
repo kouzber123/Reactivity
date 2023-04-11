@@ -38,7 +38,6 @@ export default class ActivityStore {
     this.loadingInitial = true;
     try {
       const activities = await agent.Activities.list();
-
       activities.forEach(activity => {
         this.setActivity(activity);
       });
@@ -61,14 +60,11 @@ export default class ActivityStore {
       return activity;
       //try to connect to api
     } else {
-      this.loadingInitial = true;
+      this.setLoadingInitial(true);
       try {
         activity = await agent.Activities.details(id);
         this.setActivity(activity);
-        runInAction(() => {
-          this.selectedActivity = activity;
-        });
-
+        this.selectedActivity = activity;
         this.setLoadingInitial(false);
         return activity;
       } catch (error) {
@@ -173,18 +169,18 @@ export default class ActivityStore {
     }
   };
 
-  cancelActivityToggle = async() => {
+  cancelActivityToggle = async () => {
     this.loading = true;
     try {
       await agent.Activities.attend(this.selectedActivity!.id);
-      runInAction(()=>{
+      runInAction(() => {
         this.selectedActivity!.isCancelled = !this.selectedActivity?.isCancelled;
         this.activityRegistry.set(this.selectedActivity!.id, this.selectedActivity!);
-      })
+      });
     } catch (error) {
       console.log(error);
-    } finally{
-      runInAction(()=> this.loading = false);
+    } finally {
+      runInAction(() => (this.loading = false));
     }
-  }
+  };
 }
