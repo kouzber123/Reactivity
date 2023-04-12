@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain;
 using Microsoft.AspNetCore.Identity;
+using Activity = Domain.Activity;
 
 namespace Persistence
 {
@@ -41,9 +43,9 @@ namespace Persistence
                     await userManager.CreateAsync(user, "Pa$$w0rd");
                 }
 
-                var activities = new List<Activity>
+                var activities = new List<Domain.Activity>
                 {
-                    new Activity
+                    new Domain.Activity
                     {
                         Title = "Past Activity 1",
                         Date = DateTime.Now.AddMonths(-2),
@@ -139,12 +141,12 @@ namespace Persistence
                             new ActivityAttendee
                             {
                                 AppUser = users[1],
-                                IsHost = true                            
+                                IsHost = true
                             },
                             new ActivityAttendee
                             {
                                 AppUser = users[0],
-                                IsHost = false                            
+                                IsHost = false
                             },
                         }
                     },
@@ -161,7 +163,7 @@ namespace Persistence
                             new ActivityAttendee
                             {
                                 AppUser = users[1],
-                                IsHost = true                            
+                                IsHost = true
                             }
                         }
                     },
@@ -178,12 +180,12 @@ namespace Persistence
                             new ActivityAttendee
                             {
                                 AppUser = users[0],
-                                IsHost = true                            
+                                IsHost = true
                             },
                             new ActivityAttendee
                             {
                                 AppUser = users[1],
-                                IsHost = false                            
+                                IsHost = false
                             },
                         }
                     },
@@ -200,12 +202,12 @@ namespace Persistence
                             new ActivityAttendee
                             {
                                 AppUser = users[2],
-                                IsHost = true                            
+                                IsHost = true
                             },
                             new ActivityAttendee
                             {
                                 AppUser = users[1],
-                                IsHost = false                            
+                                IsHost = false
                             },
                         }
                     },
@@ -222,12 +224,12 @@ namespace Persistence
                             new ActivityAttendee
                             {
                                 AppUser = users[0],
-                                IsHost = true                            
+                                IsHost = true
                             },
                             new ActivityAttendee
                             {
                                 AppUser = users[2],
-                                IsHost = false                            
+                                IsHost = false
                             },
                         }
                     },
@@ -244,12 +246,12 @@ namespace Persistence
                             new ActivityAttendee
                             {
                                 AppUser = users[2],
-                                IsHost = true                            
+                                IsHost = true
                             },
                             new ActivityAttendee
                             {
                                 AppUser = users[1],
-                                IsHost = false                            
+                                IsHost = false
                             },
                         }
                     }

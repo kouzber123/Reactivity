@@ -9,8 +9,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230409101646_PhotoEntityAdded")]
-    partial class PhotoEntityAdded
+    [Migration("20230412110957_photoentityfix")]
+    partial class photoentityfix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
