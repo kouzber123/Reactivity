@@ -1,10 +1,10 @@
 import { createContext, useContext } from "react";
 import ActivityStore from "./activityStore";
-import CommonStore from "./commentStore";
+import CommonStore from "./commonStore";
 import ModalStore from "./modalStore";
 import UserStore from "./userStore";
 import ProfileStore from "./profileStore";
-
+import CommentStore from "./commentStore";
 //stored in the context importing activityStore class
 //assign the values
 interface Store {
@@ -13,6 +13,7 @@ interface Store {
   userStore: UserStore;
   modalStore: ModalStore;
   profileStore: ProfileStore;
+  commentStore: CommentStore;
 }
 //create new obj
 export const store: Store = {
@@ -21,7 +22,8 @@ export const store: Store = {
   commonStore: new CommonStore(),
   userStore: new UserStore(),
   modalStore: new ModalStore(),
-  profileStore: new ProfileStore()
+  profileStore: new ProfileStore(),
+  commentStore: new CommentStore()
 };
 // use react context
 export const StoreContext = createContext(store);
