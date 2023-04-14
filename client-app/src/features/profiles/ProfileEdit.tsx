@@ -82,7 +82,7 @@ export default observer(function ProfileEdit({ profile }: Props) {
           {EditProfileMode && (
             <div style={{ paddingTop: "1rem" }}>
               <Button.Group floated="right">
-                <Button basic color="green" content="Update" loading={loading} onClick={e => handleUpdateProfile(e)} />
+                <Button disabled={profile.displayName === target.displayname && profile.bio === target.bio} basic color="green" content="Update" loading={loading} onClick={e => handleUpdateProfile(e)} />
                 <Button basic color="red" content="Cancel" disabled={loading} onClick={() => setEditProfileMode(!EditProfileMode)} />
               </Button.Group>
             </div>
