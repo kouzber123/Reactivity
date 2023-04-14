@@ -5,6 +5,7 @@ import { Activity, ActivityFormValues } from "../models/activity";
 import { User, UserFormValues } from "../models/user";
 import { store } from "../stores/store";
 import { Photo, Profile } from "../models/Profile";
+import { editProfile } from "../models/editProfile";
 
 //adding delay fakery
 //when called set time out 1000
@@ -104,7 +105,7 @@ const Profiles = {
       headers: { "Content-Type": "multipart/form-data" }
     });
   },
-
+  updateProfile:(user: editProfile) => requests.put<Profile>("profiles/", user),
   setMainPhoto: (id: string) => requests.post(`/photos/${id}/setMain`, {}),
   deletePhoto: (id: string) => requests.del(`/photos/${id}`)
 };
