@@ -4,7 +4,6 @@ import { Profile } from "../../app/models/Profile";
 import { observer } from "mobx-react-lite";
 import ProfileEdit from "./ProfileEdit";
 import ProfileFollowings from "./ProfileFollowings";
-import ProfileStore from '../../app/stores/profileStore';
 import { useStore } from "../../app/stores/store";
 
 interface Props {
@@ -14,7 +13,7 @@ export default observer(function ProfileContent({ profile }: Props) {
 
   const {profileStore} = useStore()
 
-  const {} = profileStore
+
   const panes = [
     { menuItem: "About", render: () => <ProfileEdit profile={profile} /> },
     {
