@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace Application.Core
 {
@@ -14,10 +15,15 @@ namespace Application.Core
 
         public string Error { get; set; }
 
-        
+
         //result instance type T we either found the value or it be null
         public static Result<T> Success (T value) => new Result<T>{IsSuccess = true, Value = value};
         //
         public static Result<T> Failure(string error) => new Result<T> {IsSuccess = false, Error = error};
+
+    internal static Result<Unit> success(Unit value)
+    {
+      throw new NotImplementedException();
     }
+  }
 }

@@ -5,7 +5,11 @@ export interface Profile {
   displayName: string;
   image?: string;
   bio?: string;
+  followersCount: number;
+  followingCount: number;
+  following:boolean;
   photos?: Photo[];
+
 }
 //in the construct class auto set propws on currently logged user
 //class can use as a type as well as profile

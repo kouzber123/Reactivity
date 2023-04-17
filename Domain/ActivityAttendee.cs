@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-//this is our attendee list 
-//gets values from appUser 
+//this is our attendee list
+//gets values from appUser
 namespace Domain
 {
     public class ActivityAttendee
@@ -18,6 +18,7 @@ namespace Domain
         public Activity Activity { get; set; }
 
         public bool IsHost { get; set; }
+        
 
     }
 

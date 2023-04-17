@@ -6,6 +6,7 @@ import { User, UserFormValues } from "../models/user";
 import { store } from "../stores/store";
 import { Photo, Profile } from "../models/Profile";
 import { editProfile } from "../models/editProfile";
+import { request } from "http";
 
 //adding delay fakery
 //when called set time out 1000
@@ -105,9 +106,11 @@ const Profiles = {
       headers: { "Content-Type": "multipart/form-data" }
     });
   },
-  updateProfile:(user: editProfile) => requests.put<Profile>("profiles/", user),
+  updateProfile: (user: editProfile) => requests.put<Profile>("profiles/", user),
   setMainPhoto: (id: string) => requests.post(`/photos/${id}/setMain`, {}),
-  deletePhoto: (id: string) => requests.del(`/photos/${id}`)
+  deletePhoto: (id: string) => requests.del(`/photos/${id}`),
+  updateFollowing: (username: string) => requests.post(`/follow/${username}`, {}),
+  listFollowings: (username: string, predicate: string) => requests.get<Profile[]>(`/follow/${username}?predicate=${predicate}`)
 };
 
 //this is for exporting above data
