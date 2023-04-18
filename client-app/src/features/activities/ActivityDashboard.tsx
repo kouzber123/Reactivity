@@ -1,7 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { Grid, GridColumn, Loader } from "semantic-ui-react";
-import LoadingComponent from "../../app/layouts/LoadingComponents";
 import { useStore } from "../../app/stores/store";
 import ActivityFilters from "./dashboard/ActivityFilters";
 import ActivityList from "./dashboard/ActivityList";
@@ -29,19 +28,24 @@ export default observer(function ActivityDashboard() {
     if (activityRegistry.size <= 1) loadActivities();
   }, [activityRegistry.size, loadActivities]);
 
+
+
   return (
     <Grid>
       <Grid.Column width="10">
         {activityStore.loadingInitial && !loadingNext ? (
           <>
-            <ActivityListItemPlaceholder />
-            <ActivityListItemPlaceholder />
+          <ActivityListItemPlaceholder />
+          <ActivityListItemPlaceholder />
           </>
         ) : (
+
           <InfiniteScroll pageStart={0} loadMore={handleGetNext} hasMore={!loadingNext && !!pagination && pagination.currentPage < pagination.totalPages} initialLoad={false}>
-            <ActivityList />
-          </InfiniteScroll>
+          <ActivityList />
+        </InfiniteScroll>
+
         )}
+
       </Grid.Column>
 
       <GridColumn width="6">

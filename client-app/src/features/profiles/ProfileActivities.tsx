@@ -1,23 +1,19 @@
 import { observer } from "mobx-react-lite";
 import { Tab, TabProps, Grid, Header, Card, Image } from "semantic-ui-react";
-import agent from "../../app/api/agent";
 import { useStore } from "../../app/stores/store";
-import { useState, useEffect, SyntheticEvent } from "react";
+import { useEffect, SyntheticEvent } from "react";
 import { UserActivity } from "../../app/models/userActivity";
-import ActivityProfileTab from "./ActivityProfileTab";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 
-interface Props {
-  username: string;
-}
+
 
 const panes = [
   { menuItem: "Future Events", pane: { key: "future" } },
   { menuItem: "Past Events", pane: { key: "past" } },
   { menuItem: "Hosting", pane: { key: "hosting" } }
 ];
-export default observer(function ProfileActivities({ username }: Props) {
+export default observer(function ProfileActivities() {
   const { profileStore } = useStore();
   const { loadingActivities, profile, userActivities, loadActivities } = profileStore;
 

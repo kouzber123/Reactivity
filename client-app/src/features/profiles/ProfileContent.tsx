@@ -19,7 +19,7 @@ export default observer(function ProfileContent({ profile }: Props) {
       menuItem: "Photos",
       render: () => <ProfilePhotos profile={profile} />
     },
-    { menuItem: "Events", render: () => <ProfileActivities username={profile.username} /> },
+    { menuItem: "Events", render: () => <ProfileActivities /> },
     { menuItem: "Followers", render: () => <ProfileFollowings /> },
     { menuItem: "Following", render: () => <ProfileFollowings /> }
   ];

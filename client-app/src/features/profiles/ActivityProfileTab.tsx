@@ -1,9 +1,7 @@
-import { Card, Grid, Header, Image, Tab, TabProps } from "semantic-ui-react";
+import { Card, Grid, Header, Image, Tab } from "semantic-ui-react";
 import { UserActivity } from "../../app/models/userActivity";
 import { useStore } from "../../app/stores/store";
 import { format } from "date-fns";
-import { useEffect } from "react";
-import { SyntheticEvent } from "react-toastify/dist/utils";
 interface Props {
   setPredicate: any;
   predicate: string;
@@ -11,10 +9,10 @@ interface Props {
 }
 export default function ActivityProfileTab({ setPredicate, activities, predicate }: Props) {
   const { profileStore } = useStore();
-  const { loadingActivities, profile, userActivities, loadActivities } = profileStore;
+  const { loadingActivities } = profileStore;
   setPredicate(predicate);
 
-  
+
   // <Image src={`/assets/categoryImages/${activity.category}.jpg`} fluid style={activityImageStyle} />
   return (
     <Tab.Pane loading={loadingActivities}>
