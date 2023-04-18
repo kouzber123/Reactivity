@@ -5,14 +5,13 @@ import { observer } from "mobx-react-lite";
 import ProfileEdit from "./ProfileEdit";
 import ProfileFollowings from "./ProfileFollowings";
 import { useStore } from "../../app/stores/store";
+import ProfileActivities from "./ProfileActivities";
 
 interface Props {
   profile: Profile;
 }
 export default observer(function ProfileContent({ profile }: Props) {
-
-  const {profileStore} = useStore()
-
+  const { profileStore } = useStore();
 
   const panes = [
     { menuItem: "About", render: () => <ProfileEdit profile={profile} /> },
@@ -20,10 +19,10 @@ export default observer(function ProfileContent({ profile }: Props) {
       menuItem: "Photos",
       render: () => <ProfilePhotos profile={profile} />
     },
-    { menuItem: "Events", render: () => <Tab.Pane>Events Content</Tab.Pane> },
+    { menuItem: "Events", render: () => <ProfileActivities username={profile.username} /> },
     { menuItem: "Followers", render: () => <ProfileFollowings /> },
     { menuItem: "Following", render: () => <ProfileFollowings /> }
   ];
 
-  return <Tab menu={{ fluid: true, vertical: true }} menuPosition="right" panes={panes} onTabChange={(e, data) => profileStore.seActiveTab(data.activeIndex) } />;
+  return <Tab menu={{ fluid: true, vertical: true }} menuPosition="right" panes={panes} onTabChange={(e, data) => profileStore.seActiveTab(data.activeIndex)} />;
 });

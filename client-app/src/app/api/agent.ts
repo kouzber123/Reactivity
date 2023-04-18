@@ -7,6 +7,7 @@ import { store } from "../stores/store";
 import { Photo, Profile } from "../models/Profile";
 import { editProfile } from "../models/editProfile";
 import { PaginatedResults } from "../models/pagination";
+import { UserActivity } from "../models/userActivity";
 
 //adding delay fakery
 //when called set time out 1000
@@ -104,6 +105,7 @@ const Account = {
 };
 const Profiles = {
   get: (username: string) => requests.get<Profile>(`/profiles/${username}`),
+  getList: (username: string, predicate: string) => requests.get<UserActivity[]>(`/profiles/${username}/activities?predicate=${predicate}`),
   uploadPhoto: (file: Blob) => {
     let formData = new FormData();
     formData.append("File", file);

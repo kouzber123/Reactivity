@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using Application.Photos;
+using Application.Activities;
 using Application.Profiles;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,11 +9,17 @@ namespace API.Controllers
     [HttpGet("{username}")]
     public async Task<IActionResult> GetProfile(string username)
     {
-      return HandleResult(await Mediator.Send(new Details.Query { Username = username }));
+      return HandleResult(await Mediator.Send(new Application.Profiles.Details.Query { Username = username }));
+    }
+
+
+    [HttpGet("{username}/activities")]
+    public async Task<IActionResult> GetList(string username, string predicate)
+    {
+      return HandleResult(await Mediator.Send(new Application.Profiles.ListActivities.Query { Predicate = predicate, Username = username }));
     }
 
     [HttpPut]
-
     public async Task<IActionResult> UpdateProfile([FromBody] UpdateProfile.Command command)
     {
       return HandleResult(await Mediator.Send(command));
