@@ -57,10 +57,15 @@ namespace API
       //order matters first authentication then authorization
       app.UseAuthentication();
       app.UseAuthorization();
+
+      app.UseDefaultFiles();
+      app.UseStaticFiles();
+
       app.UseEndpoints(endpoints =>
       {
         endpoints.MapControllers();
         endpoints.MapHub<ChatHub>("/chat");
+        endpoints.MapFallbackToController("Index", "Fallback");
       });
     }
   }
