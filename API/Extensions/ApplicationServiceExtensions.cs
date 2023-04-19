@@ -27,7 +27,7 @@ namespace API.Extensions
       services.AddDbContext<DataContext>(opt =>
       {
         //connection string source with this we can add the context to the database
-        opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
+        opt.UseNpgsql(config.GetConnectionString("DefaultConnection"));
       });
       //allow any method and header from 3000 otherwise cors will block requests
       services.AddCors(opt =>
