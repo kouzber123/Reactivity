@@ -29,6 +29,7 @@
     "react-dropzone": "^14.2.3",
     "react-infinite-scroller": "^1.2.6",
     "react-router-dom": "^6.10.0",
+    "react-script": "^2.0.5",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.0.8",
     "semantic-ui-css": "^2.4.1",

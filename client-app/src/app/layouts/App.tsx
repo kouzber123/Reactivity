@@ -25,6 +25,9 @@ function App() {
   if (activityStore.loadingInitial) return <LoadingComponent content="Loading app..." />;
   return (
     <>
+      <ScrollRestoration />
+      <ToastContainer position="bottom-right" hideProgressBar />
+      <ModalContainer />
       {location.pathname === "/" ? (
         <HomePage />
       ) : (
@@ -35,9 +38,6 @@ function App() {
           </Container>
         </>
       )}
-      <ScrollRestoration />
-      <ToastContainer position="bottom-right" hideProgressBar />
-      <ModalContainer />
     </>
   );
 }

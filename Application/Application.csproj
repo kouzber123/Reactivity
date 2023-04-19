@@ -1,5 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+<packageSources>
+    <clear />
+    <add key="nuget.org" value="https://api.nuget.org/v3/index.json" protocolVersion="3" />
+    <add key="Contoso" value="https://contoso.com/packages/" />
+    <add key="Test Source" value="c:\packages" />
+</packageSources>
   <ItemGroup>
     <ProjectReference Include="..\Persistence\Persistence.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
@@ -12,8 +17,11 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+  <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
+
 </Project>
+

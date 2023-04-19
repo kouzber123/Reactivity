@@ -1,11 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+<packageSources>
+    <clear />
+    <add key="nuget.org" value="https://api.nuget.org/v3/index.json" protocolVersion="3" />
+    <add key="Contoso" value="https://contoso.com/packages/" />
+    <add key="Test Source" value="c:\packages" />
+</packageSources>
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+ <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.5" />
   </ItemGroup>
 
 </Project>

@@ -8,10 +8,6 @@ builder.Services.AddControllers(opt =>
 {
   var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
   opt.Filters.Add(new AuthorizeFilter(policy));
-})
-.AddFluentValidation(config =>
-{
-  config.RegisterValidatorsFromAssemblyContaining<Create>();
 });
 
 builder.Services.AddApplicationServices(builder.Configuration);
@@ -64,7 +60,7 @@ catch (Exception ex)
   var logger = services.GetRequiredService<ILogger<Program>>();
   logger.LogError(ex, "An error occured during migration");
 }
-await app.RunAsync();
+app.Run();
 
 
 

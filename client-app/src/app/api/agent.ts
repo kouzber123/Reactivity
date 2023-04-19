@@ -1,6 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { toast } from "react-toastify";
-import { history } from "../..";
 import { Activity, ActivityFormValues } from "../models/activity";
 import { User, UserFormValues } from "../models/user";
 import { store } from "../stores/store";
@@ -8,6 +7,7 @@ import { Photo, Profile } from "../models/Profile";
 import { editProfile } from "../models/editProfile";
 import { PaginatedResults } from "../models/pagination";
 import { UserActivity } from "../models/userActivity";
+import { router } from "../router/Routes";
 
 //adding delay fakery
 //when called set time out 1000
@@ -46,7 +46,7 @@ axios.interceptors.response.use(
           toast.error(data);
         }
         if (config.method === "get" && data.errors.hasOwnProperty("id")) {
-          history.push("/not-found");
+          router.navigate("/not-found");
         }
         if (data.errors) {
           const modalStateErrors = [];
@@ -64,11 +64,11 @@ axios.interceptors.response.use(
         toast.error("unauthorised");
         break;
       case 404:
-        history.push("/not-found");
+        router.navigate("/not-found");
         break;
       case 500:
         store.commonStore.setServerError(data);
-        history.push("/server-error");
+        router.navigate("/server-error");
         break;
     }
     return Promise.reject(error);
