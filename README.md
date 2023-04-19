@@ -1,7 +1,8 @@
 # Reactivity
 C# REACT 
 #working with my master mr cummings
-
+# CQRS  pattern (command , query , responsibility , segregation)
+# MediatR makes it easy to follow cqrs pattern command files > post etc,  query > read
 #profile page
 
 <img width="800" alt="profilepageReactivity" src="https://user-images.githubusercontent.com/48252892/232747979-600cf0c8-37d1-4316-9a66-73cc8b6b55d4.png">
